@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-nav {
+.header-nav {
   padding-left: 2rem;
   padding-right: 2rem;
   margin-left: auto;
