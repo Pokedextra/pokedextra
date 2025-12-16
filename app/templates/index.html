@@ -6,29 +6,49 @@
     <title>Pokédextra</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="/">
-          <img src="{{ url_for('static', filename='images/logo/nav-logo.svg') }}" alt="Pokédextra logo">
-        </a>
-      </nav>
-    </header>
-    <main>
+    <div id="app">
       <header>
-        <h1>National Pokédex</h1>
-        <p>The Complete National Pokédex - All 1,025 Pokémon</p>
+        <nav>
+          <div class="nav-bar">
+            <a href="/">
+              <div class="nav-logo">
+                <img src="{{ url_for('static', filename='images/logo/nav-logo.svg') }}" alt="Pokédextra logo">
+              </div>
+            </a>
+            <div class="nav-links">
+              <!-- add buttons for navigation links here -->
+            </div>
+          </div>
+        </nav>
       </header>
-      <nav>
-        <p>FILTER POKÉMON BY</p>
-      </nav>
       <main>
-        <p>Pokémon Grid</p>
+        <header>
+          <div class="pokedex-header">
+            <h1>National Pokédex</h1>
+            <p>The Complete National Pokédex - All 1,025 Pokémon</p>
+          </div>
+        </header>
+        <nav>
+          <div class="pokedex-filter">
+            <p>FILTER POKÉMON BY</p>
+          </div>
+        </nav>
+        <main>
+          <div class="pokedex-grid">
+            <p>Pokémon Grid</p>
+          </div>
+        </main>
       </main>
-    </main>
-    <footer>
-      <p>© 2025 Pokédextra • Pokémon images & names © 1995-2025 Nintendo/Game Freak • Data from
-        <a href="https://pokeapi.co/">PokéAPI</a>
-      </p>
-    </footer>
+      <footer>
+        <div class="footer-links">
+          <!-- add buttons for footer links here -->
+        </div>
+        <div class="footer-copyright">
+          <p>© 2025 Pokédextra • Pokémon images & names © 1995-2025 Nintendo/Game Freak • Data from
+            <a href="https://pokeapi.co/">PokéAPI</a>
+          </p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
