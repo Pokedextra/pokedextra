@@ -1,0 +1,9 @@
+[project]
+name = "pokedextra"
+version = "0.1.0"
+description = "The Pokédextra website"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "flask>=3.1.2",
+]
