@@ -31,14 +31,14 @@ function displayPokemon(pokemon) {
     pokemon.forEach((pokemon) => {
         const pokemonID = pokemon.url.split("/")[6];
         const pokemonArticle = document.createElement("article");
-        pokemonArticle.className = "pokedex-grid-pokemon";
+        pokemonArticle.className = "pokemon-group";
         pokemonArticle.innerHTML = `
-            <div class="pokedex-pokemon-item">
-              <div class="pokedex-pokemon-id">
+            <div class="pokemon-item">
+              <div class="pokemon-id">
                 <p>#${pokemonID}</p>
               </div>
-              <div class="pokedex-pokemon-image">
-                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}"/>
+              <div class="pokemon-image">
+                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}" loading="lazy"/>
               </div>
               <h2>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
             </div>
