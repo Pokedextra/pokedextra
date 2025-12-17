@@ -40,7 +40,7 @@ function displayPokemon(pokemon) {
               <div class="pokemon-image">
                 <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}" loading="lazy"/>
               </div>
-              <h2>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
+              <h2>${pokemon.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('-')}</h2>
             </div>
         `;
 
