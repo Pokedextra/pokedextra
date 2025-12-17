@@ -65,3 +65,10 @@ body {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
+
+.pokedex-main {
+  padding: 2rem 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+}
