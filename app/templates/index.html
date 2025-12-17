@@ -8,6 +8,7 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon-dark.ico') }}" media="(prefers-color-scheme: dark)"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="{{ url_for('static', filename='js/pokemon.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/filters.js') }}" defer></script>
   </head>
   <body>
     <div id="app">
@@ -35,8 +36,11 @@
           </div>
         </header>
         <nav class="pokedex-nav">
-          <div class="pokedex-filter">
-            <p>FILTER POKÉMON BY</p>
+          <div class="pokedex-filter-content">
+            <div class="pokedex-filters">
+              <p>FILTER POKÉMON BY</p>
+              <div class="pokedex-filters-generation"></div>
+            </div>
           </div>
         </nav>
         <main class="pokedex-main">
