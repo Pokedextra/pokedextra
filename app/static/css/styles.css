@@ -5,6 +5,7 @@ body {
 }
 
 .global-header {
+  background-color: white;
   border-color: rgb(243 244 246);
   border-top-width: 0;
   border-left-width: 0;
