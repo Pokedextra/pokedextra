@@ -1,0 +1,1 @@
+console.log('pokemon.js loaded successfully')
