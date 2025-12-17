@@ -8,6 +8,7 @@ fetch(`${BASE_URL}/pokemon?limit=${MAX_POKEMON}`)
 .then((response) => response.json())
 .then((data) => {
     allPokemon = data.results;
+    displayPokemon(allPokemon)
 })
 
 async function fetchPokemonDataBeforeRedirect(id) {
@@ -22,4 +23,34 @@ async function fetchPokemonDataBeforeRedirect(id) {
     } catch (error) {
         console.error("Failed to fetch Pokémon data before redirect");
     }
+}
+
+function displayPokemon(pokemon) {
+    pokedexGrid.innerHTML = "";
+
+    pokemon.forEach((pokemon) => {
+        const pokemonID = pokemon.url.split("/")[6];
+        const pokemonArticle = document.createElement("article");
+        pokemonArticle.className = "pokedex-grid-pokemon";
+        pokemonArticle.innerHTML = `
+            <div class="pokedex-pokemon-item">
+              <div class="pokedex-pokemon-id">
+                <p>#${pokemonID}</p>
+              </div>
+              <div class="pokedex-pokemon-image">
+                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}"/>
+              </div>
+              <h2>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
+            </div>
+        `;
+
+        pokemonArticle.addEventListener("click", async () => {
+            const success = await fetchPokemonDataBeforeRedirect(pokemonID);
+            if (success) {
+                window.location.href = `./detail.html?id=${pokemonID}`;
+            }
+        });
+
+        pokedexGrid.appendChild(pokemonArticle);
+    });
 }
