@@ -11,20 +11,6 @@ fetch(`${BASE_URL}/pokemon-species?limit=${MAX_POKEMON}`)
     displayPokemon(allPokemon)
 })
 
-async function fetchPokemonDataBeforeRedirect(id) {
-    try {
-        const [pokemon, pokemonSpecies] = await Promise.all([
-            fetch(`${BASE_URL}/pokemon/${id}`)
-                .then((res) => res.json()),
-            fetch(`${BASE_URL}/pokemon-species/${id}`)
-                .then((res) => res.json()),
-        ]);
-        return true
-    } catch (error) {
-        console.error("Failed to fetch Pokémon data before redirect");
-    }
-}
-
 function displayPokemon(pokemon) {
     pokedexGrid.innerHTML = "";
 
