@@ -53,7 +53,7 @@ export function displayPokemon(pokemon) {
                 <p>#${displayPokemonID}</p>
               </div>
               <div class="pokemon-image">
-                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}" loading="lazy"/>
+                <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${capitalise(pokemon.name)}" loading="lazy"/>
               </div>
               <h2>${capitalise(pokemon.name)}</h2>
             </div>

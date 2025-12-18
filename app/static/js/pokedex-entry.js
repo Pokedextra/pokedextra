@@ -87,6 +87,9 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     // Set html elements
     pokedexEntry.innerHTML = `
       <div class="pokedex-summary">
+        <div class="pokemon-image">
+          <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonSpecies.id}.png" alt="${pokemonName}" loading="lazy"/>
+        </div>
         <h2>${pokemonName} #${displayPokemonID}</h2>
         <p>Type ${pokemonType}</p>
         <p>Species ${pokemonGenus}</p>
