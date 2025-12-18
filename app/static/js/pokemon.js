@@ -12,24 +12,56 @@ export let generationPokemon = [];
 
 // Fetches all 1,025 pokemon and stores data in allPokemon array
 export async function fetchAllPokemon() {
-    const response = await fetch(`${BASE_URL}/pokemon-species?limit=${MAX_POKEMON}`);
-    const data = await response.json();
-    allPokemon = data.results;
+    // Check if local storage exists
+    const allPokemonFromLocalStorage = localStorage.getItem("allPokemonLocalStore");
+
+    // If local storage exists, load it into allPokemon array
+    if (allPokemonFromLocalStorage) {
+        allPokemon = JSON.parse(allPokemonFromLocalStorage);
+        // Test message
+        console.log("allPokemon data fetched from local storage");
+    } else {
+        // Fetch pokemon data from PokeAPI
+        const response = await fetch(`${BASE_URL}/pokemon-species?limit=${MAX_POKEMON}`);
+        const data = await response.json();
+        allPokemon = data.results;
+        // Create local storage
+        localStorage.setItem("allPokemonLocalStore", JSON.stringify(allPokemon));
+        // Test message
+        console.log("allPokemon data fetched from pokeapi");
+    }
+
     return allPokemon;
 }
 
 // Fetches pokemon by generation and stores data as nested arrays in generationPokemon array
 export async function fetchPokemonByGeneration() {
-    for (let generation = 1; generation <= NUM_GENERATIONS; generation++) {
-        const response = await fetch(`${BASE_URL}/generation/${generation}`);
-        const data = await response.json();
-        const species = data.pokemon_species.map(pokemon => {
-            const id = parseInt(pokemon.url.split("/")[6]);
-            return {name: pokemon.name, id};
-        });
+    // Check if local storage exists
+    const generationPokemonFromLocalStorage = localStorage.getItem("generationPokemonLocalStore");
 
-        species.sort((a, b) => a.id - b.id);
-        generationPokemon.push(species);
+    // If local storage exists, load it into generationPokemon array
+    if (generationPokemonFromLocalStorage) {
+        generationPokemon = JSON.parse(generationPokemonFromLocalStorage);
+        // Test message
+        console.log("generationPokemon data fetched from local storage");
+    } else {
+        // Fetch pokemon data from PokeAPI for each generation
+        for (let generation = 1; generation <= NUM_GENERATIONS; generation++) {
+            const response = await fetch(`${BASE_URL}/generation/${generation}`);
+            const data = await response.json();
+            const species = data.pokemon_species.map(pokemon => {
+                const id = parseInt(pokemon.url.split("/")[6]);
+                return {name: pokemon.name, id};
+            });
+
+            // Sort fetched data by id ascending (fetched data default is alphabetical)
+            species.sort((a, b) => a.id - b.id);
+            generationPokemon.push(species);
+        }
+        // Create local storage
+        localStorage.setItem("generationPokemonLocalStore", JSON.stringify(generationPokemon));
+        // Test message
+        console.log("generationPokemon data fetched from pokeapi");
     }
 }
 
