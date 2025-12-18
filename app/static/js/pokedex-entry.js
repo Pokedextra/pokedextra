@@ -25,7 +25,7 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     pokedexEntry.innerHTML = "";
 
     // Access pokemon species endpoint data
-    const pokemonName = pokemonSpecies.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('-')
+    const pokemonName = capitalise(pokemonSpecies.name)
 
     let displayPokemonID;
         if (pokemonSpecies.id < 1000) {

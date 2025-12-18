@@ -55,11 +55,16 @@ export function displayPokemon(pokemon) {
               <div class="pokemon-image">
                 <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}" loading="lazy"/>
               </div>
-              <h2>${pokemon.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('-')}</h2>
+              <h2>${capitalise(pokemon.name)}</h2>
             </div>
           </a>
         `;
 
         pokedexGrid.appendChild(pokemonArticle);
     });
+}
+
+// Function to capitalise first letter of each word
+function capitalise(str) {
+    return str.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 }
