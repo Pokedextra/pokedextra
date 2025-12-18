@@ -79,7 +79,6 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     }).join(', ');
     // Pokedex stats
     const [hp, attack, defense, specialAttack, specialDefense, speed] = pokemon.stats.map(stat => stat.base_stat);
-    const total = hp + attack + defense + specialAttack + specialDefense + speed;
 
     // TESTING
     console.log(pokemon);
@@ -87,35 +86,103 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     // Set html elements
     pokedexEntry.innerHTML = `
       <div class="pokedex-summary">
-        <div class="pokemon-image">
-          <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonSpecies.id}.png" alt="${pokemonName}" loading="lazy"/>
+        <div class="pokedex-summary-grid">
+          <div class="summary-grid-pokemon">
+            <h1>${pokemonName} #${displayPokemonID}</h1>
+            <div class="pokedex-image">
+              <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonSpecies.id}.png" alt="${pokemonName}" loading="lazy"/>
+            </div>
+            <p>Type ${pokemonType}</p>
+          </div>
+          <div class="summary-grid-profile">
+            <h2>PROFILE</h2>
+            <div class="grid-content">
+              <p>Species</p>
+              <h3>${pokemonGenus}</h3>
+            </div>
+            <div class="grid-content">
+              <p>Height</p>
+              <h3>${pokemonHeight}m</h3>
+            </div>
+            <div class="grid-content">
+              <p>Weight</p>
+              <h3>${pokemonWeight}kg</h3>
+            </div>
+            <div class="grid-content">
+              <p>Abilities</p>
+              <h3>${pokemonAbilities}</h3>
+            </div>
+          </div>
+          <div class="summary-grid-vertical">
+            <div class="summary-grid-training">
+              <h2>TRAINING</h2>
+              <div class="grid-content">       
+                <p>Catch Rate</p>
+                <h3>${pokemonCatchRate}</h3>
+              </div>
+              <div class="grid-content">            
+                <p>Base Friendship</p>
+                <h3>${pokemonBaseFriendship}</h3>
+              </div>
+              <div class="grid-content">            
+                <p>Growth Rate</p>
+                <h3>${pokemonGrowthRate}</h3>
+              </div>
+              <div class="grid-content">
+                <p>EV Yield</p>
+                <h3>${pokemonEvYield}</h3>
+              </div>
+            </div>
+            <div class="summary-grid-breeding">
+              <h2>BREEDING</h2>
+              <div class="grid-content">
+                <p>Gender</p>
+                <h3>${pokemonGender}</h3>
+              </div>
+              <div class="grid-content">
+                <p>Hatch Time</p>
+                <h3>${pokemonHatchTime}</h3>
+              </div>
+              <div class="grid-content">              
+                <p>Egg Groups</p>
+                <h3>${pokemonEggGroups}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="summary-grid-stats">
+            <h2>BASE STATS</h2>
+            <div class="summary-grid-vertical">
+              <div class="summary-stats-1">
+                <div class="grid-content">
+                  <p>HP</p>
+                  <h3>${hp}</h3>
+                </div> 
+                <div class="grid-content">
+                  <p>Attack</p>
+                  <h3>${attack}</h3>
+                </div> 
+                <div class="grid-content">
+                  <p>Defense</p>
+                  <h3>${defense}</h3>
+                </div> 
+              </div>
+              <div class="summary-stats-2">              
+                <div class="grid-content">
+                  <p>Sp. Atk</p>
+                  <h3>${specialAttack}</h3>
+                </div> 
+                <div class="grid-content">
+                  <p>Sp. Def</p>
+                  <h3>${specialDefense}</h3>
+                </div> 
+                <div class="grid-content">
+                  <p>Speed</p>
+                  <h3>${speed}</h3>
+                </div>
+              </div>
+            </div>                                                                                 
+          </div>           
         </div>
-        <h2>${pokemonName} #${displayPokemonID}</h2>
-        <p>Type ${pokemonType}</p>
-        <p>Species ${pokemonGenus}</p>
-        <p>Height ${pokemonHeight}m</p>
-        <p>Weight ${pokemonWeight}kg</p>
-        <p>Abilities ${pokemonAbilities}</p>
-      </div>
-      <div class="pokedex-training">
-        <p>Catch Rate ${pokemonCatchRate}</p>
-        <p>Base Friendship ${pokemonBaseFriendship}</p>
-        <p>Growth Rate ${pokemonGrowthRate}</p>
-        <p>EV Yield ${pokemonEvYield}</p>
-      </div>
-      <div class="pokedex-breeding">
-        <p>Gender ${pokemonGender}</p>
-        <p>Hatch Time ${pokemonHatchTime}</p>
-        <p>Egg Groups ${pokemonEggGroups}</p>
-      </div>
-      <div class="pokedex-stats">
-        <p>HP ${hp}</p>
-        <p>Attack ${attack}</p>
-        <p>Defense ${defense}</p>
-        <p>Sp. Atk ${specialAttack}</p>
-        <p>Sp. Def ${specialDefense}</p>
-        <p>Speed ${speed}</p>
-        <p>Total ${total}</p>
       </div>
     `;
 }
