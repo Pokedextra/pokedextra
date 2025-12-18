@@ -1,5 +1,10 @@
+// Import data and functions from pokemon.js
+import {allPokemon, generationPokemon, fetchAllPokemon, fetchPokemonByGeneration, displayPokemon} from "./pokemon.js";
+
+// Select div element
 const pokedexFiltersGeneration = document.querySelector(".pokedex-filters-generation")
 
+// Set button elements
 pokedexFiltersGeneration.innerHTML = `
     <div class="generation-all">
       <button id="all-generations">All Generations</button>
@@ -17,12 +22,28 @@ pokedexFiltersGeneration.innerHTML = `
     </div>
 `
 
-document.addEventListener("DOMContentLoaded", () => {
+// Run on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    // Fetch pokemon data
+    try {
+        await fetchAllPokemon();
+    } catch (error) {
+        console.log("Failed to fetch all pokemon: ", error)
+    }
+    try {
+        await fetchPokemonByGeneration();
+    } catch (error) {
+        console.log("Failed to fetch pokemon by generation: ", error)
+    }
+
+    // Select buttons
     const allGenerationsButton = document.querySelector(".generation-all button");
     const generationButtons = document.querySelectorAll(".generation-numbered button");
 
     // Default: All Generations active
     allGenerationsButton.classList.add('active');
+        // Display all pokemon
+        displayPokemon(allPokemon);
 
     // Click: All Generations
     allGenerationsButton.addEventListener('click', () =>{
@@ -30,16 +51,20 @@ document.addEventListener("DOMContentLoaded", () => {
         generationButtons.forEach(button => button.classList.remove('active'));
         // Make button active
         allGenerationsButton.classList.add('active');
+        // Display all pokemon
+        displayPokemon(allPokemon);
     });
 
-    // CLick: Numbered generations
-    generationButtons.forEach((button) => {
+    // Click: Numbered generations
+    generationButtons.forEach((button, index) => {
         button.addEventListener("click", function () {
             // Clear active from other buttons
             generationButtons.forEach(btn => btn.classList.remove('active'));
             allGenerationsButton.classList.remove('active');
             // Make button active
             this.classList.add('active');
+            // Display pokemon from selected generation
+            displayPokemon(generationPokemon[index])
         });
     });
 });
