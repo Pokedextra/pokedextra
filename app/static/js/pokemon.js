@@ -19,7 +19,7 @@ export async function fetchAllPokemon() {
     if (allPokemonFromLocalStorage) {
         allPokemon = JSON.parse(allPokemonFromLocalStorage);
         // Test message
-        console.log("allPokemon data fetched from local storage");
+        console.log("allPokemon data loaded from local storage");
     } else {
         // Fetch pokemon data from PokeAPI
         const response = await fetch(`${BASE_URL}/pokemon-species?limit=${MAX_POKEMON}`);
@@ -43,7 +43,7 @@ export async function fetchPokemonByGeneration() {
     if (generationPokemonFromLocalStorage) {
         generationPokemon = JSON.parse(generationPokemonFromLocalStorage);
         // Test message
-        console.log("generationPokemon data fetched from local storage");
+        console.log("generationPokemon data loaded from local storage");
     } else {
         // Fetch pokemon data from PokeAPI for each generation
         for (let generation = 1; generation <= NUM_GENERATIONS; generation++) {

@@ -6,15 +6,51 @@ const pokedexEntry = document.querySelector(".pokedex-entry-main");
 async function fetchPokemonData() {
     // Fetch pokemon-species data using pokemon name
     const pokemonName = window.location.pathname.split("/")[2];
-    const pokemonSpeciesResponse = await fetch(`${BASE_URL}/pokemon-species/${pokemonName}`);
-    const pokemonSpeciesData = await pokemonSpeciesResponse.json();
+
+    // Check if local storage exists
+    const speciesDataFromLocalStorage = localStorage.getItem(`${pokemonName}SpeciesDataLocalStore`);
+
+    // Declare pokemonSpeciesData
+    let pokemonSpeciesData;
+
+    // If local storage exists, load it into pokemonSpeciesData
+    if (speciesDataFromLocalStorage) {
+        pokemonSpeciesData = JSON.parse(speciesDataFromLocalStorage);
+        // Test message
+        console.log("pokemonSpeciesData loaded from local storage");
+    } else {
+        // Fetch data from PokeAPI
+        const pokemonSpeciesResponse = await fetch(`${BASE_URL}/pokemon-species/${pokemonName}`);
+        pokemonSpeciesData = await pokemonSpeciesResponse.json();
+        // Create local storage
+        localStorage.setItem(`${pokemonName}SpeciesDataLocalStore`, JSON.stringify(pokemonSpeciesData));
+        // Test message
+        console.log("pokemonSpeciesData fetched from pokeapi");
+    }
 
     // Extract national pokedex id from pokemon-species data
     const pokemonID = pokemonSpeciesData.id;
 
-    // Fetch pokemon data using national dex id
-    const pokemonResponse = await fetch(`${BASE_URL}/pokemon/${pokemonID}`);
-    const pokemonData = await pokemonResponse.json();
+    // Check if local storage exists
+    const pokemonDataFromLocalStorage = localStorage.getItem(`${pokemonID}DataLocalStore`);
+
+    // Declare pokemonData
+    let pokemonData;
+
+    // If local storage exists, load it into pokemonData
+    if (pokemonDataFromLocalStorage) {
+        pokemonData = JSON.parse(pokemonDataFromLocalStorage);
+        // Test message
+        console.log("pokemonData loaded from local storage");
+    } else {
+        // Fetch pokemon data using national dex id
+        const pokemonResponse = await fetch(`${BASE_URL}/pokemon/${pokemonID}`);
+        pokemonData = await pokemonResponse.json();
+        // Create local storage
+        localStorage.setItem(`${pokemonID}DataLocalStore`, JSON.stringify(pokemonData));
+        // Test message
+        console.log("pokemonData fetched from pokeapi");
+    }
 
     // Return fetched pokemon data
     return[pokemonSpeciesData, pokemonData];
