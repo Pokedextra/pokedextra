@@ -4,6 +4,12 @@ import {allPokemon, generationPokemon, fetchAllPokemon, fetchPokemonByGeneration
 // Select div element
 const pokedexFiltersGeneration = document.querySelector(".pokedex-filters-generation")
 
+// Export const to be used in pokemon.js
+export const searchInput = document.querySelector(".search-input");
+export const pokemonState = {
+    currentSelection: null,
+};
+
 // Set button elements
 pokedexFiltersGeneration.innerHTML = `
     <div class="generation-all">
@@ -44,20 +50,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     allGenerationsButton.classList.add('active');
         // Display all pokemon
         displayPokemon(allPokemon);
+        pokemonState.currentSelection = allPokemon;
+        console.log(pokemonState.currentSelection)
 
     // Click: All Generations
     allGenerationsButton.addEventListener('click', () =>{
+        // Clear search
+        searchInput.value = "";
         // Clear active from other buttons
         generationButtons.forEach(button => button.classList.remove('active'));
         // Make button active
         allGenerationsButton.classList.add('active');
         // Display all pokemon
         displayPokemon(allPokemon);
+        pokemonState.currentSelection = allPokemon;
     });
 
     // Click: Numbered generations
     generationButtons.forEach((button, index) => {
         button.addEventListener("click", function () {
+            // Clear search
+            searchInput.value = "";
             // Clear active from other buttons
             generationButtons.forEach(btn => btn.classList.remove('active'));
             allGenerationsButton.classList.remove('active');
@@ -65,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             this.classList.add('active');
             // Display pokemon from selected generation
             displayPokemon(generationPokemon[index]);
+            pokemonState.currentSelection = generationPokemon[index];
         });
     });
 });

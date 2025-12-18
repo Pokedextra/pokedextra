@@ -1,3 +1,5 @@
+import { pokemonState, searchInput } from "./filters.js";
+
 // Define constants (global vars)
 const BASE_URL = "https://pokeapi.co/api/v2/";
 const MAX_POKEMON = 1025;
@@ -68,3 +70,30 @@ export function displayPokemon(pokemon) {
 function capitalise(str) {
     return str.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 }
+
+// Function to handle search functionality
+export function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    let searchResults;
+
+    if (searchTerm !==""){
+        if (!isNaN(searchTerm)) {
+            // Search by pokemon id
+            searchResults = pokemonState.currentSelection.filter((pokemon) => {
+                const pokemonID = (pokemon.url && pokemon.url.split("/")[6]) || String(pokemon.id);
+                return pokemonID.startsWith(searchTerm);
+            });
+        } else {
+            // Search by pokemon name
+            searchResults = pokemonState.currentSelection.filter((pokemon) => {
+               return pokemon.name.toLowerCase().startsWith(searchTerm);
+            });
+        }
+    } else {
+        // Reset pokemon
+        searchResults = pokemonState.currentSelection;
+    }
+    
+    displayPokemon(searchResults);
+}
+searchInput.addEventListener("keyup", handleSearch);
