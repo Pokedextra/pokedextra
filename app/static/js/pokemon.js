@@ -40,6 +40,7 @@ export function displayPokemon(pokemon) {
         const pokemonArticle = document.createElement("article");
         pokemonArticle.className = "pokemon-group";
         pokemonArticle.innerHTML = `
+          <a href="/pokemon/${pokemon.name}" class="pokemon-link">
             <div class="pokemon-item">
               <div class="pokemon-id">
                 <p>#${pokemonID}</p>
@@ -49,6 +50,7 @@ export function displayPokemon(pokemon) {
               </div>
               <h2>${pokemon.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('-')}</h2>
             </div>
+          </a>
         `;
 
         pokedexGrid.appendChild(pokemonArticle);

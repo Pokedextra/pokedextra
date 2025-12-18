@@ -142,6 +142,10 @@ body {
   display: grid;
 }
 
+.pokemon-link {
+  text-decoration: none;
+}
+
 .pokemon-item {
   padding: 0.75rem;
 }
@@ -169,6 +173,7 @@ body {
   font-size: 0.75rem;
   line-height: 1rem;
   text-align: center;
+  color: black;
 }
 
 footer {
