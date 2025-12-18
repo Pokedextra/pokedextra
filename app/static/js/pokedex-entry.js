@@ -55,9 +55,6 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     const pokemonHatchTime = pokemonSpecies.hatch_counter + " cycles";
     const pokemonEggGroups = pokemonSpecies.egg_groups.map(egg_groups => capitalise(egg_groups.name)).join(', ');
 
-    // TESTING
-    console.log(pokemonSpecies);
-
     // Access pokemon endpoint data
     // Pokedex summary
     const pokemonType = pokemon.types.map(type => capitalise(type.type.name)).join(', ');
@@ -79,9 +76,6 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     }).join(', ');
     // Pokedex stats
     const [hp, attack, defense, specialAttack, specialDefense, speed] = pokemon.stats.map(stat => stat.base_stat);
-
-    // TESTING
-    console.log(pokemon);
 
     // Set html elements
     pokedexEntry.innerHTML = `
