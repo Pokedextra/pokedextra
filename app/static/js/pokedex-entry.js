@@ -24,22 +24,59 @@ async function fetchPokemonData() {
 function displayPokemonData(pokemonSpecies, pokemon) {
     pokedexEntry.innerHTML = "";
 
-    // Parse pokemon species endpoint data
+    // Access pokemon species endpoint data
+    const pokemonName = pokemonSpecies.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('-')
+
+    let displayPokemonID;
+        if (pokemonSpecies.id < 1000) {
+            displayPokemonID = String(pokemonSpecies.id).padStart(3, '0');
+        }
+        else {
+            displayPokemonID = pokemonSpecies.id;
+        }
+
+    const pokemonGenus = pokemonSpecies.genera.find(element => element.language.name === 'en')?.genus;
 
     // TESTING
     console.log(pokemonSpecies);
 
-    // Parse pokemon endpoint data
+    // Access pokemon endpoint data
+    const pokemonType = pokemon.types.map(type => capitalise(type.type.name)).join(', ');
+    const pokemonHeight = (pokemon.height/10).toFixed(1);
+    const pokemonWeight = (pokemon.weight/10).toFixed(1);
+    const pokemonAbilities = pokemon.abilities.map(ability => capitalise(ability.ability.name)).join(', ');
+    const [hp, attack, defense, specialAttack, specialDefense, speed] = pokemon.stats.map(stat => stat.base_stat);
+    const total = hp + attack + defense + specialAttack + specialDefense + speed;
 
     // TESTING
     console.log(pokemon);
 
     // Set html elements
     pokedexEntry.innerHTML = `
-    
+      <div class="pokedex-summary">
+        <h2>${pokemonName} #${displayPokemonID}</h2>
+        <p>Type ${pokemonType}</p>
+        <p>Species ${pokemonGenus}</p>
+        <p>Height ${pokemonHeight}m</p>
+        <p>Weight ${pokemonWeight}kg</p>
+        <p>Abilities ${pokemonAbilities}</p>
+      </div>
+      <div class="pokedex-stats">
+        <p>HP ${hp}</p>
+        <p>Attack ${attack}</p>
+        <p>Defense ${defense}</p>
+        <p>Sp. Atk ${specialAttack}</p>
+        <p>Sp. Def ${specialDefense}</p>
+        <p>Speed ${speed}</p>
+        <p>Total ${total}</p>
+      </div>
     `;
 }
 
+// Function to capitalise first letter of each word
+function capitalise(str) {
+    return str.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
 
 // Run on page load
 document.addEventListener("DOMContentLoaded", async () => {

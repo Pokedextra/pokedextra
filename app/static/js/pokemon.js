@@ -37,13 +37,20 @@ export function displayPokemon(pokemon) {
 
     pokemon.forEach((pokemon) => {
         const pokemonID = pokemon.id ?? pokemon.url.split("/")[6];
+        let displayPokemonID;
+        if (pokemonID < 1000) {
+            displayPokemonID = String(pokemonID).padStart(3, '0');
+        }
+        else {
+            displayPokemonID = pokemonID;
+        }
         const pokemonArticle = document.createElement("article");
         pokemonArticle.className = "pokemon-group";
         pokemonArticle.innerHTML = `
           <a href="/pokemon/${pokemon.name}" class="pokemon-link">
             <div class="pokemon-item">
               <div class="pokemon-id">
-                <p>#${pokemonID}</p>
+                <p>#${displayPokemonID}</p>
               </div>
               <div class="pokemon-image">
                 <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}" loading="lazy"/>
