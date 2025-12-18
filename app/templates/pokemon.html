@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédextra | {{ pokemon_name | capitalize }} Pokédex Entry</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon-light.ico') }}" media="(prefers-color-scheme: light)"/>
+    <link rel="icon" href="{{ url_for('static', filename='favicon-dark.ico') }}" media="(prefers-color-scheme: dark)"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/pokedex-entry.js') }}" defer></script>
+  </head>
+<body>
+  <div id="app">
+    <header class="global-header">
+      <nav class="header-nav">
+        <div class="nav-bar">
+          <a href="/">
+            <div class="nav-logo">
+              <img src="{{ url_for('static', filename='images/logo/nav-logo.svg') }}" alt="Pokédextra logo">
+            </div>
+          </a>
+          <div class="nav-links">
+            <!-- add buttons for navigation links here -->
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <main class="pokedex-entry-main">
+        <h1>Pokedex Entry Here</h1>
+      </main>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <!-- add buttons for footer links here -->
+        </div>
+        <div class="footer-copyright">
+          <p>© 2025 Pokédextra • Pokémon images & names © 1995-2025 Nintendo/Game Freak • Data from
+            <a href="https://pokeapi.co/">PokéAPI</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

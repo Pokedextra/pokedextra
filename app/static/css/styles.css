@@ -4,6 +4,8 @@ body {
   font-family: "Consolas", "Menlo", "Monaco", "Courier New", monospace;
 }
 
+
+/* Global nav*/
 .global-header {
   background-color: white;
   border-color: rgb(243 244 246);
@@ -38,6 +40,8 @@ body {
   height: 2rem;
 }
 
+
+/* Pokedex page */
 .content-header {
   background: #020024;
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
@@ -176,6 +180,17 @@ body {
   color: black;
 }
 
+
+/* Pokedex entry page */
+.pokedex-entry-main {
+  padding: 2rem 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+}
+
+
+/* Global footer */
 footer {
   background: #020024;
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
@@ -191,7 +206,7 @@ footer {
 
 .footer-copyright p {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.75rem;
   line-height: 1rem;
   text-align: center;
 }
