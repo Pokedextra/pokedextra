@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Make button active
             this.classList.add('active');
             // Display pokemon from selected generation
-            displayPokemon(generationPokemon[index])
+            displayPokemon(generationPokemon[index]);
         });
     });
 });
