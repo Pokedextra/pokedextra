@@ -25,8 +25,8 @@ function displayPokemonData(pokemonSpecies, pokemon) {
     pokedexEntry.innerHTML = "";
 
     // Access pokemon species endpoint data
+    // Pokedex summary
     const pokemonName = capitalise(pokemonSpecies.name)
-
     let displayPokemonID;
         if (pokemonSpecies.id < 1000) {
             displayPokemonID = String(pokemonSpecies.id).padStart(3, '0');
@@ -34,17 +34,50 @@ function displayPokemonData(pokemonSpecies, pokemon) {
         else {
             displayPokemonID = pokemonSpecies.id;
         }
-
     const pokemonGenus = pokemonSpecies.genera.find(element => element.language.name === 'en')?.genus;
+    // Pokedex training
+    const pokemonCatchRate = pokemonSpecies.capture_rate;
+    let pokemonBaseFriendship = pokemonSpecies.base_happiness;
+        if (pokemonBaseFriendship === 0) {
+            pokemonBaseFriendship = "-";
+        }
+    const pokemonGrowthRate = capitalise(pokemonSpecies.growth_rate.name);
+    // Pokedex breeding
+    let pokemonGender = pokemonSpecies.gender_rate;
+        if (pokemonGender === -1) {
+            pokemonGender = "Genderless";
+        }
+        else {
+            const femaleRatio = (pokemonGender/8) * 100;
+            const maleRatio = 100 - femaleRatio;
+            pokemonGender = `♂${maleRatio}% ♀${femaleRatio}%`;
+        }
+    const pokemonHatchTime = pokemonSpecies.hatch_counter + " cycles";
+    const pokemonEggGroups = pokemonSpecies.egg_groups.map(egg_groups => capitalise(egg_groups.name)).join(', ');
 
     // TESTING
     console.log(pokemonSpecies);
 
     // Access pokemon endpoint data
+    // Pokedex summary
     const pokemonType = pokemon.types.map(type => capitalise(type.type.name)).join(', ');
     const pokemonHeight = (pokemon.height/10).toFixed(1);
     const pokemonWeight = (pokemon.weight/10).toFixed(1);
     const pokemonAbilities = pokemon.abilities.map(ability => capitalise(ability.ability.name)).join(', ');
+    // Pokedex training
+        const statNameMapping = {
+        hp: 'HP',
+        attack: 'Atk',
+        defense: 'Def',
+        'special-attack': 'SpA',
+        'special-defense': 'SpD',
+        speed: 'Spe'
+    };
+    let pokemonEvYield = pokemon.stats.filter(stat => stat.effort !== 0).map(stat => {
+        const statName = statNameMapping[stat.stat.name] || stat.stat.name;
+        return `${stat.effort} ${statName}`;
+    }).join(', ');
+    // Pokedex stats
     const [hp, attack, defense, specialAttack, specialDefense, speed] = pokemon.stats.map(stat => stat.base_stat);
     const total = hp + attack + defense + specialAttack + specialDefense + speed;
 
@@ -60,6 +93,17 @@ function displayPokemonData(pokemonSpecies, pokemon) {
         <p>Height ${pokemonHeight}m</p>
         <p>Weight ${pokemonWeight}kg</p>
         <p>Abilities ${pokemonAbilities}</p>
+      </div>
+      <div class="pokedex-training">
+        <p>Catch Rate ${pokemonCatchRate}</p>
+        <p>Base Friendship ${pokemonBaseFriendship}</p>
+        <p>Growth Rate ${pokemonGrowthRate}</p>
+        <p>EV Yield ${pokemonEvYield}</p>
+      </div>
+      <div class="pokedex-breeding">
+        <p>Gender ${pokemonGender}</p>
+        <p>Hatch Time ${pokemonHatchTime}</p>
+        <p>Egg Groups ${pokemonEggGroups}</p>
       </div>
       <div class="pokedex-stats">
         <p>HP ${hp}</p>
